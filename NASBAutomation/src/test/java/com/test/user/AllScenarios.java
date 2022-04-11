@@ -21,7 +21,9 @@ import com.pages_Lead.CustomerPortalLogin;
 import com.pages_Lead.LeadPageLogin;
 import com.pages_Lead.LeadPageLogout;
 import com.pages_Lead.LeadVerification;
-import com.pages_Lead.ReadEmail;
+import com.pages_Lead.ReadConfirmationEmailAndSignIn;
+import com.pages_Lead.ReadOTPFromEmail;
+import com.pages_Lead.VerifyEmailFromEmails;
 
 
 
@@ -41,9 +43,6 @@ public class AllScenarios extends Base_Class {
 		log=new Log();
 		TestListener = new TestListener();
 		screenShot = new com.Utility.ScreenShot(null);
-
-		
-
 	}
 
 	@Test(dataProvider = "TestData")
@@ -92,11 +91,33 @@ public class AllScenarios extends Base_Class {
 				ExtentTestManager.getTest().log(Status.PASS, "Browser Closed");
 				Log.info("Chrome is closed");
 				
-				context.setAttribute("fileName", "EmailRead");
-				ReadEmail re=new ReadEmail();
-				re.readMail();
-				ExtentTestManager.getTest().log(Status.PASS, "Outlook Email Read Successfully");
-				Log.info("Email Read Successfully");
+				context.setAttribute("fileName", "EmailOTPRead");
+				ReadOTPFromEmail reOTP=new ReadOTPFromEmail();
+				reOTP.readMail();
+				ExtentTestManager.getTest().log(Status.PASS, "Outlook Email OTP Read Successfully");
+				Log.info("Email OTP Read Successfully");
+				
+				context.setAttribute("fileName", "Logout");
+				driver.quit();
+				ExtentTestManager.getTest().log(Status.PASS, "Browser Closed");
+				Log.info("Chrome is closed");
+				
+				context.setAttribute("fileName", "EmailVerifyRead");
+				VerifyEmailFromEmails reVerify=new VerifyEmailFromEmails();
+				reVerify.verifyEmailFromEmails();
+				ExtentTestManager.getTest().log(Status.PASS, "Outlook Verify Email Read Successfully");
+				Log.info("Verify Email Read Successfully");
+				
+				context.setAttribute("fileName", "Logout");
+				driver.quit();
+				ExtentTestManager.getTest().log(Status.PASS, "Browser Closed");
+				Log.info("Chrome is closed");
+				
+				context.setAttribute("fileName", "EmailSign-InRead");
+				ReadConfirmationEmailAndSignIn reSignin=new ReadConfirmationEmailAndSignIn();
+				reSignin.readConfirmationEmail();
+				ExtentTestManager.getTest().log(Status.PASS, "Outlook Sign-In Email Read Successfully");
+				Log.info("Sign-In Email Read Successfully");
 				
 				context.setAttribute("fileName", "Logout");
 				driver.quit();

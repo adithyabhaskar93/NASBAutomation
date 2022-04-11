@@ -9,9 +9,9 @@ import com.Utility.Log;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-
-public class ReadEmail extends Base_Class{
-	public void readMail() throws Exception
+public class ReadConfirmationEmailAndSignIn extends Base_Class{
+	
+	public void readConfirmationEmail() throws InterruptedException
 	{
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
@@ -35,21 +35,12 @@ public class ReadEmail extends Base_Class{
 		System.out.println("Sender Address: "+from);
 		String sub=driver.findElement(By.xpath("//span[@class='rpHighlightAllClass rpHighlightSubjectClass']")).getText();
 		System.out.println("Subject Line: "+sub);
-		String msg=driver.findElement(By.cssSelector("#Td3")).getText();
+		String msg=driver.findElement(By.xpath("//*[@id=\"Item.MessageUniqueBody\"]/div/div/div/table/tbody/tr/td")).getText();
 		System.out.println("Message Body: " +msg);
 		
-		char[] a=msg.toCharArray();
-		int len=a.length;
-		String number = "";
-		for (int i=0; i<len; i++)
-		{
-			if(Character.isDigit(a[i]))
-			{
-				number+=a[i];
-			}
-		}
-		String OTP=number.substring(6, 12);
-		System.out.println("OTP is "+OTP);
+		//Click on Sign-In Below
+		driver.findElement(By.xpath("//*[@id=\"Item.MessageUniqueBody\"]/div/div/div/table/tbody/tr/td/table[2]/tbody/tr/td/table/tbody/tr/td/center/table/tbody/tr/td/table/tbody/tr[5]/td/table/tbody/tr/td/table/tbody/tr/td/a/strong")).click();
+		
 	}
 
 }
